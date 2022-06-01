@@ -9,22 +9,31 @@ import "./Main.css";
 const GOOGLE_CLIENT_ID = "121479668229-t5j82jrbi9oejh7c8avada226s75bopn.apps.googleusercontent.com";
 
 const Main = ({ userId, handleLogin, handleLogout }) => {
-  const [word, setWord] = useState([]);
+  const [word, setWord] = useState("");
   const [guessedWords, setGuessedWords] = useState([]);
+  const [won, setWon] = useState(false);
   const WORD_LENGTH = 5;
   const NUM_WORDS = 6;
 
+  const TARGET_WORD = "allen";
+
   const keyboardHandler = (event) => {
-    if (event.key === "Enter") {
-      if (word.length === WORD_LENGTH) {
-        setGuessedWords([...guessedWords, [...word]]);
-        setWord([]);
+    if (!won) {
+      if (event.key === "Enter") {
+        if (word.length === WORD_LENGTH) {
+          setGuessedWords([...guessedWords, word]);
+          if (word === TARGET_WORD) {
+            console.log("YOU WIN!");
+            setWon(true);
+          }
+          setWord("");
+        }
+      } else if (event.key.match(/[A-Za-z]/) && event.key.length === 1) {
+        if (word.length < WORD_LENGTH && guessedWords.length < NUM_WORDS)
+          setWord(word + event.key.toLowerCase());
+      } else if (event.key === "Delete" || event.key === "Backspace") {
+        if (word.length > 0) setWord(word.slice(0, word.length - 1));
       }
-    } else if (event.key.match(/[A-Za-z]/) && event.key.length === 1) {
-      if (word.length < WORD_LENGTH && guessedWords.length < NUM_WORDS)
-        setWord([...word, event.key]);
-    } else if (event.key === "Delete" || event.key === "Backspace") {
-      if (word.length > 0) setWord(word.splice(0, word.length - 1));
     }
   };
 
