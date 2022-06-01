@@ -1,0 +1,26 @@
+/* Fill me in :) */
+
+.mainContainer {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.gridContainer {
+  display: flex;
+  flex-direction: column;
+  width: 25vw;
+  height: 50vh;
+  background-color: blue;
+  margin-top: 120px;
+}
+
+.keyboardContainer {
+  width: 60vw;
+  height: 25vh;
+  background-color: orange;
+  position: absolute;
+  bottom: 0;
+}
