@@ -4,8 +4,11 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: black;
   /* justify-content: center; */
   align-items: center;
+  border: none;
+  outline: none;
 }
 
 .gridContainer {
@@ -13,8 +16,8 @@
   flex-direction: column;
   width: 25vw;
   height: 55vh;
-  background-color: blue;
   margin-top: 120px;
+  justify-content: space-between;
 }
 
 .keyboardContainer {
