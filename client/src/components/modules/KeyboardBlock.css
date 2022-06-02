@@ -1,7 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap");
 
 .keyboardBlock {
-  background-color: #818384;
   color: white;
   height: 75px;
   width: 60px;
@@ -16,4 +15,20 @@
   margin-right: 3px;
   margin-top: 5px;
   user-select: none;
+}
+
+.green {
+  background-color: #538d4e;
+}
+
+.yellow {
+  background-color: #b59f3b;
+}
+
+.darkGrey {
+  background-color: #3a3a3c;
+}
+
+.grey {
+  background-color: #818384;
 }

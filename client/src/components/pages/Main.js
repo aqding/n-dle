@@ -32,6 +32,10 @@ const Main = ({ userId, handleLogin, handleLogout }) => {
     }
   };
 
+  const handleDel = () => {
+    if (word.length > 0) setWord(word.slice(0, word.length - 1));
+  };
+
   const handleLetter = (letter) => {
     if (word.length < WORD_LENGTH && guessedWords.length < NUM_WORDS)
       setWord(word + letter.toLowerCase());
@@ -64,8 +68,35 @@ const Main = ({ userId, handleLogin, handleLogout }) => {
   const handleY = () => handleLetter("Y");
   const handleZ = () => handleLetter("Z");
 
-  const handleDel = () => {
-    if (word.length > 0) setWord(word.slice(0, word.length - 1));
+  const handlers = {
+    a: handleA,
+    b: handleB,
+    c: handleC,
+    d: handleD,
+    e: handleE,
+    f: handleF,
+    g: handleG,
+    h: handleH,
+    i: handleI,
+    j: handleJ,
+    k: handleK,
+    l: handleL,
+    m: handleM,
+    n: handleN,
+    o: handleO,
+    p: handleP,
+    q: handleQ,
+    r: handleR,
+    s: handleS,
+    t: handleT,
+    u: handleU,
+    v: handleV,
+    w: handleW,
+    x: handleX,
+    y: handleY,
+    z: handleZ,
+    enter: handleEnter,
+    delete: handleDel,
   };
 
   const keyboardHandler = (event) => {
@@ -86,7 +117,7 @@ const Main = ({ userId, handleLogin, handleLogout }) => {
         {guessedWords.map((guess) => (
           <GuessedWord word={guess} targetWord={TARGET_WORD} />
         ))}
-        <NewWord word={word} wordLength={WORD_LENGTH} />
+        {guessedWords.length === 6 ? <></> : <NewWord word={word} wordLength={WORD_LENGTH} />}
         {[...new Array(Math.max(NUM_WORDS - guessedWords.length - 1, 0))].map((remainingGuess) => (
           <div>
             <NewWord word="" wordLength={WORD_LENGTH} />
@@ -94,7 +125,7 @@ const Main = ({ userId, handleLogin, handleLogout }) => {
         ))}
       </div>
       <div className="keyboardContainer">
-        <Keyboard />
+        <Keyboard handlers={handlers} word={TARGET_WORD} guesses={guessedWords} />
       </div>
     </div>
   );
