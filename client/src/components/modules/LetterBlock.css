@@ -21,12 +21,15 @@
 
 .green {
   background-color: #538d4e;
+  border-color: #538d4e;
 }
 
 .yellow {
   background-color: #b59f3b;
+  border-color: #b59f3b;
 }
 
 .grey {
   background-color: #3a3a3c;
+  border-color: #3a3a3c;
 }
