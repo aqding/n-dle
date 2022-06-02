@@ -7,6 +7,7 @@ import "./Main.css";
 import LetterBlock from "../modules/LetterBlock";
 import NewWord from "../modules/NewWord";
 import GuessedWord from "../modules/GuessedWord";
+import Keyboard from "../modules/Keyboard";
 
 //TODO: REPLACE WITH YOUR OWN CLIENT_ID
 const GOOGLE_CLIENT_ID = "121479668229-t5j82jrbi9oejh7c8avada226s75bopn.apps.googleusercontent.com";
@@ -20,22 +21,61 @@ const Main = ({ userId, handleLogin, handleLogout }) => {
 
   const TARGET_WORD = "allen";
 
+  const handleEnter = () => {
+    if (word.length === WORD_LENGTH) {
+      setGuessedWords([...guessedWords, word]);
+      if (word === TARGET_WORD) {
+        console.log("YOU WIN!");
+        setWon(true);
+      }
+      setWord("");
+    }
+  };
+
+  const handleLetter = (letter) => {
+    if (word.length < WORD_LENGTH && guessedWords.length < NUM_WORDS)
+      setWord(word + letter.toLowerCase());
+  };
+
+  const handleA = () => handleLetter("A");
+  const handleB = () => handleLetter("B");
+  const handleC = () => handleLetter("C");
+  const handleD = () => handleLetter("D");
+  const handleE = () => handleLetter("E");
+  const handleF = () => handleLetter("F");
+  const handleG = () => handleLetter("G");
+  const handleH = () => handleLetter("H");
+  const handleI = () => handleLetter("I");
+  const handleJ = () => handleLetter("J");
+  const handleK = () => handleLetter("K");
+  const handleL = () => handleLetter("L");
+  const handleM = () => handleLetter("M");
+  const handleN = () => handleLetter("N");
+  const handleO = () => handleLetter("O");
+  const handleP = () => handleLetter("P");
+  const handleQ = () => handleLetter("Q");
+  const handleR = () => handleLetter("R");
+  const handleS = () => handleLetter("S");
+  const handleT = () => handleLetter("T");
+  const handleU = () => handleLetter("U");
+  const handleV = () => handleLetter("V");
+  const handleW = () => handleLetter("W");
+  const handleX = () => handleLetter("X");
+  const handleY = () => handleLetter("Y");
+  const handleZ = () => handleLetter("Z");
+
+  const handleDel = () => {
+    if (word.length > 0) setWord(word.slice(0, word.length - 1));
+  };
+
   const keyboardHandler = (event) => {
     if (!won) {
       if (event.key === "Enter") {
-        if (word.length === WORD_LENGTH) {
-          setGuessedWords([...guessedWords, word]);
-          if (word === TARGET_WORD) {
-            console.log("YOU WIN!");
-            setWon(true);
-          }
-          setWord("");
-        }
+        handleEnter();
       } else if (event.key.match(/[A-Za-z]/) && event.key.length === 1) {
-        if (word.length < WORD_LENGTH && guessedWords.length < NUM_WORDS)
-          setWord(word + event.key.toLowerCase());
+        handleLetter(event.key);
       } else if (event.key === "Delete" || event.key === "Backspace") {
-        if (word.length > 0) setWord(word.slice(0, word.length - 1));
+        handleDel();
       }
     }
   };
@@ -53,7 +93,9 @@ const Main = ({ userId, handleLogin, handleLogout }) => {
           </div>
         ))}
       </div>
-      <div className="keyboardContainer"></div>
+      <div className="keyboardContainer">
+        <Keyboard />
+      </div>
     </div>
   );
 };

@@ -21,9 +21,8 @@
 }
 
 .keyboardContainer {
-  width: 60vw;
-  height: 25vh;
-  background-color: orange;
+  width: 700px;
+  height: 250px;
   position: absolute;
   bottom: 0;
 }

@@ -1,0 +1,17 @@
+.keyboardContainer {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+}
+
+.keyboardRowOdd {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.keyboardRowEven {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
