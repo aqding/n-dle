@@ -4,8 +4,8 @@ import "./LetterBlock.css";
 
 const LetterBlock = ({ letter, color }) => {
   return (
-    <div className="block">
-      <p>{letter}</p>
+    <div className={`block ${color}`}>
+      <p className="letter">{letter.toUpperCase()}</p>
     </div>
   );
 };
