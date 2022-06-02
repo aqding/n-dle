@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import KeyboardBlock from "./KeyboardBlock";
+import KeyboardBlockSpecial from "./KeyboardBlockSpecial";
 import "./Keyboard.css";
 const Keyboard = () => {
   return (
@@ -29,7 +30,7 @@ const Keyboard = () => {
         <KeyboardBlock letter="L" />
       </div>
       <div className="keyboardRowOdd">
-        <KeyboardBlock letter="Enter" />
+        <KeyboardBlockSpecial type="ENTER" />
         <KeyboardBlock letter="Z" />
         <KeyboardBlock letter="X" />
         <KeyboardBlock letter="C" />
@@ -37,7 +38,7 @@ const Keyboard = () => {
         <KeyboardBlock letter="B" />
         <KeyboardBlock letter="N" />
         <KeyboardBlock letter="M" />
-        <KeyboardBlock letter="Delete" />
+        <KeyboardBlockSpecial type="DELETE" />
       </div>
     </div>
   );
