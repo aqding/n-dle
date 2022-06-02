@@ -1,6 +1,6 @@
 .block {
-  height: 8vh;
-  width: 8vh;
+  height: 75px;
+  width: 75px;
   background-color: black;
   border-color: grey;
   border-width: 2px;
@@ -18,13 +18,13 @@
 }
 
 .green {
-  background-color: green;
+  background-color: #538d4e;
 }
 
 .yellow {
-  background-color: yellow;
+  background-color: #b59f3b;
 }
 
 .grey {
-  background-color: grey;
+  background-color: #3a3a3c;
 }
