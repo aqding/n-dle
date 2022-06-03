@@ -49,41 +49,29 @@ const Keyboard = ({ handlers, word, guesses }) => {
         colorMap.set(guess[i], "darkGrey");
     }
   }
+
+  const firstRow = ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"];
+  const secondRow = ["a", "s", "d", "f", "g", "h", "j", "k", "l"];
+  const thirdRow = ["z", "x", "c", "v", "b", "n", "m"];
+
   return (
     <div className="keyboardContainer">
       <div className="keyboardRowOdd">
-        <KeyboardBlock letter="Q" func={handlers.q} color={colorMap.get("q")} />
-        <KeyboardBlock letter="W" func={handlers.w} color={colorMap.get("w")} />
-        <KeyboardBlock letter="E" func={handlers.e} color={colorMap.get("e")} />
-        <KeyboardBlock letter="R" func={handlers.r} color={colorMap.get("r")} />
-        <KeyboardBlock letter="T" func={handlers.t} color={colorMap.get("t")} />
-        <KeyboardBlock letter="Y" func={handlers.y} color={colorMap.get("y")} />
-        <KeyboardBlock letter="U" func={handlers.u} color={colorMap.get("u")} />
-        <KeyboardBlock letter="I" func={handlers.i} color={colorMap.get("i")} />
-        <KeyboardBlock letter="O" func={handlers.o} color={colorMap.get("o")} />
-        <KeyboardBlock letter="P" func={handlers.p} color={colorMap.get("p")} />
+        {firstRow.map((letter) => (
+          <KeyboardBlock letter={letter} func={handlers.get(letter)} color={colorMap.get(letter)} />
+        ))}
       </div>
       <div className="keyboardRowEven">
-        <KeyboardBlock letter="A" func={handlers.a} color={colorMap.get("a")} />
-        <KeyboardBlock letter="S" func={handlers.s} color={colorMap.get("s")} />
-        <KeyboardBlock letter="D" func={handlers.d} color={colorMap.get("d")} />
-        <KeyboardBlock letter="F" func={handlers.f} color={colorMap.get("f")} />
-        <KeyboardBlock letter="G" func={handlers.g} color={colorMap.get("g")} />
-        <KeyboardBlock letter="H" func={handlers.h} color={colorMap.get("h")} />
-        <KeyboardBlock letter="J" func={handlers.j} color={colorMap.get("j")} />
-        <KeyboardBlock letter="K" func={handlers.k} color={colorMap.get("k")} />
-        <KeyboardBlock letter="L" func={handlers.l} color={colorMap.get("l")} />
+        {secondRow.map((letter) => (
+          <KeyboardBlock letter={letter} func={handlers.get(letter)} color={colorMap.get(letter)} />
+        ))}
       </div>
       <div className="keyboardRowOdd">
-        <KeyboardBlockSpecial type="ENTER" func={handlers.enter} />
-        <KeyboardBlock letter="Z" func={handlers.z} color={colorMap.get("z")} />
-        <KeyboardBlock letter="X" func={handlers.x} color={colorMap.get("x")} />
-        <KeyboardBlock letter="C" func={handlers.c} color={colorMap.get("c")} />
-        <KeyboardBlock letter="V" func={handlers.v} color={colorMap.get("v")} />
-        <KeyboardBlock letter="B" func={handlers.b} color={colorMap.get("b")} />
-        <KeyboardBlock letter="N" func={handlers.n} color={colorMap.get("n")} />
-        <KeyboardBlock letter="M" func={handlers.m} color={colorMap.get("m")} />
-        <KeyboardBlockSpecial type="DELETE" func={handlers.delete} />
+        <KeyboardBlockSpecial type="ENTER" func={handlers.get("enter")} />
+        {thirdRow.map((letter) => (
+          <KeyboardBlock letter={letter} func={handlers.get(letter)} color={colorMap.get(letter)} />
+        ))}
+        <KeyboardBlockSpecial type="DELETE" func={handlers.get("delete")} />
       </div>
     </div>
   );

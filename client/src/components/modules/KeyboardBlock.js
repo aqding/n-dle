@@ -5,7 +5,7 @@ import "./KeyboardBlock.css";
 const KeyboardBlock = ({ letter, color, func }) => {
   return (
     <div className={`keyboardBlock ${color}`} onClick={func}>
-      {letter}
+      {letter.toUpperCase()}
     </div>
   );
 };
