@@ -117,7 +117,11 @@ const Main = ({ userId, handleLogin, handleLogout }) => {
         {guessedWords.map((guess) => (
           <GuessedWord word={guess} targetWord={TARGET_WORD} />
         ))}
-        {guessedWords.length === 6 ? <></> : <NewWord word={word} wordLength={WORD_LENGTH} />}
+        {guessedWords.length === NUM_WORDS ? (
+          <></>
+        ) : (
+          <NewWord word={word} wordLength={WORD_LENGTH} />
+        )}
         {[...new Array(Math.max(NUM_WORDS - guessedWords.length - 1, 0))].map((remainingGuess) => (
           <div>
             <NewWord word="" wordLength={WORD_LENGTH} />
