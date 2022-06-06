@@ -8,21 +8,39 @@ import LetterBlock from "../modules/LetterBlock";
 import NewWord from "../modules/NewWord";
 import GuessedWord from "../modules/GuessedWord";
 import Keyboard from "../modules/Keyboard";
+import WordCorpus from "../Corpus";
 
 //TODO: REPLACE WITH YOUR OWN CLIENT_ID
 const GOOGLE_CLIENT_ID = "121479668229-t5j82jrbi9oejh7c8avada226s75bopn.apps.googleusercontent.com";
 
-const Main = ({ userId, handleLogin, handleLogout }) => {
+const Main = ({ wordLength, numWords }) => {
   const [word, setWord] = useState("");
   const [guessedWords, setGuessedWords] = useState([]);
   const [won, setWon] = useState(false);
-  const WORD_LENGTH = 5;
-  const NUM_WORDS = 6;
+  const WORD_LENGTH = wordLength;
+  const NUM_WORDS = numWords;
+  console.log("word corpus: ", WordCorpus.corpusFromPath);
+  let CORPUS;
+  WordCorpus.corpusFromPath("Corpora/5.txt").then(newCorpus => {
+    CORPUS = newCorpus;
+    console.log("LIST IS:", newCorpus.wordList);
+  });
 
-  const TARGET_WORD = "allen";
+  const TARGET_WORD = "deeps";
+
+  const raiseAlert = (message) => {
+    console.log("Word not in corpus!");
+    /**
+     * Todo: raise pop up box with message
+     */
+  }
 
   const handleEnter = () => {
     if (word.length === WORD_LENGTH) {
+      if(!CORPUS.containsWord(word)){
+        raiseAlert(`${word} not in corpus!`);
+        return;
+      }
       setGuessedWords([...guessedWords, word]);
       if (word === TARGET_WORD) {
         console.log("YOU WIN!");

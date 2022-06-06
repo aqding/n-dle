@@ -15,6 +15,8 @@ const User = require("./models/user");
 // import authentication library
 const auth = require("./auth");
 
+const fs = require("./fs");
+
 // api endpoints: all these paths will be prefixed with "/api/"
 const router = express.Router();
 
@@ -31,6 +33,14 @@ router.get("/whoami", (req, res) => {
 
   res.send(req.user);
 });
+
+router.get("/corpusText", (req, res) => {
+  console.log("moo 1");
+  const wordCorpusPath = req.query.wordCorpusPath;
+  const rawCorpusText =  readFileSync(wordCorpusPath);
+  console.log("moo 2");
+  res.send(rawCorpusText);
+})
 
 router.post("/initsocket", (req, res) => {
   // do nothing if user not logged in

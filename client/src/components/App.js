@@ -18,7 +18,7 @@ const App = () => {
     <>
       <Navbar />
       <Router>
-        <Main path="/" />
+        <Main path="/" wordLength={5} numWords={6} />
         <NotFound default />
       </Router>
     </>
