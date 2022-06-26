@@ -16,10 +16,14 @@ Once inside, install dependencies:
 $ npm install
 ```
 
-Run hotloader to build and watch for changes:
+Run the following command to start the server on http://localhost:3000/
+
+```
+$ npm run start
+```
+
+Finally, the client and watch for changes with:
 
 ```
 $ npm run hotloader
 ```
-
-Visit at http://localhost:4000/ (may differ on your machine) to view site.
