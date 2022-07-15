@@ -19,12 +19,14 @@ const Main = ({ wordLength, numWords }) => {
   const [won, setWon] = useState(false);
   const WORD_LENGTH = wordLength;
   const NUM_WORDS = numWords;
-  console.log("word corpus: ", WordCorpus.corpusFromPath);
   let CORPUS;
-  WordCorpus.corpusFromPath("Corpora/5.txt").then(newCorpus => {
-    CORPUS = newCorpus;
-    console.log("LIST IS:", newCorpus.wordList);
-  });
+
+  useEffect(() => {
+    WordCorpus.corpusFromPath("/Corpora/5.txt").then((newCorpus) => {
+      CORPUS = newCorpus;
+      console.log("LIST IS:", newCorpus.words);
+    });
+  }, []);
 
   const TARGET_WORD = "deeps";
 
@@ -33,11 +35,11 @@ const Main = ({ wordLength, numWords }) => {
     /**
      * Todo: raise pop up box with message
      */
-  }
+  };
 
   const handleEnter = () => {
     if (word.length === WORD_LENGTH) {
-      if(!CORPUS.containsWord(word)){
+      if (!CORPUS.containsWord(word)) {
         raiseAlert(`${word} not in corpus!`);
         return;
       }
@@ -59,8 +61,10 @@ const Main = ({ wordLength, numWords }) => {
       setWord(word + letter.toLowerCase());
   };
 
-  const letter_handlers = Array.from(Array(26)).map((elt, index) => index).map(x => [String.fromCharCode(x + 97), () => handleLetter(String.fromCharCode(x + 65))]);
-  const handlers = new Map([...letter_handlers, ["enter", handleEnter],["delete", handleDel]])
+  const letter_handlers = Array.from(Array(26))
+    .map((elt, index) => index)
+    .map((x) => [String.fromCharCode(x + 97), () => handleLetter(String.fromCharCode(x + 65))]);
+  const handlers = new Map([...letter_handlers, ["enter", handleEnter], ["delete", handleDel]]);
 
   const keyboardHandler = (event) => {
     if (!won) {

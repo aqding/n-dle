@@ -15,12 +15,13 @@ const User = require("./models/user");
 // import authentication library
 const auth = require("./auth");
 
-
 // api endpoints: all these paths will be prefixed with "/api/"
 const router = express.Router();
 
 //initialize socket
 const socketManager = require("./server-socket");
+const fs = require("fs");
+const path = require("path");
 
 router.post("/login", auth.login);
 router.post("/logout", auth.logout);
@@ -35,13 +36,16 @@ router.get("/whoami", (req, res) => {
 
 router.get("/corpusText", (req, res) => {
   const wordCorpusPath = req.query.wordCorpusPath;
-  const rawCorpusText =  readFileSync(wordCorpusPath);
-  res.send(rawCorpusText);
+  fs.readFile(path.join(__dirname, wordCorpusPath), "utf-8", (err, data) => {
+    if (err) console.log("Failed to retrieve corpus");
+    res.send(data.split(/\n/));
+  });
 });
 
 router.post("/initsocket", (req, res) => {
   // do nothing if user not logged in
-  if (req.user) socketManager.addUser(req.user, socketManager.getSocketFromSocketID(req.body.socketid));
+  if (req.user)
+    socketManager.addUser(req.user, socketManager.getSocketFromSocketID(req.body.socketid));
   res.send({});
 });
 
