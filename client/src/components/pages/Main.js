@@ -19,28 +19,30 @@ const Main = ({ wordLength, numWords }) => {
   const [won, setWon] = useState(false);
   const WORD_LENGTH = wordLength;
   const NUM_WORDS = numWords;
-  let CORPUS;
+  const [CORPUS, setCorpus] = useState(null);
+  const [TARGET_WORD, setTargetWord] = useState("");
+  const [ALERT, setAlert] = useState(false);
 
   useEffect(() => {
     WordCorpus.corpusFromPath("/Corpora/5.txt").then((newCorpus) => {
-      CORPUS = newCorpus;
-      console.log("LIST IS:", newCorpus.words);
+      setCorpus(newCorpus);
+      setTargetWord(newCorpus.generateWord());
     });
   }, []);
 
-  const TARGET_WORD = "deeps";
-
-  const raiseAlert = (message) => {
-    console.log("Word not in corpus!");
-    /**
-     * Todo: raise pop up box with message
-     */
+  const raiseAlert = () => {
+    if (ALERT) return;
+    setAlert(true);
+    setTimeout(() => {
+      setAlert(false);
+    }, 3000);
   };
 
   const handleEnter = () => {
     if (word.length === WORD_LENGTH) {
+      console.log("TARGET", TARGET_WORD);
       if (!CORPUS.containsWord(word)) {
-        raiseAlert(`${word} not in corpus!`);
+        raiseAlert();
         return;
       }
       setGuessedWords([...guessedWords, word]);
@@ -80,6 +82,7 @@ const Main = ({ wordLength, numWords }) => {
 
   return (
     <div className="mainContainer" onKeyDown={keyboardHandler} tabIndex="0">
+      {ALERT ? <div className="alertContainer fadeAlert"> Invalid word!</div> : null};
       <div className="gridContainer">
         {guessedWords.map((guess) => (
           <GuessedWord word={guess} targetWord={TARGET_WORD} />

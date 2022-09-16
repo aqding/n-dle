@@ -1,5 +1,7 @@
 /* Fill me in :) */
 
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap");
+
 .mainContainer {
   height: 100vh;
   display: flex;
@@ -9,6 +11,7 @@
   align-items: center;
   border: none;
   outline: none;
+  font-family: "Roboto", sans-serif;
 }
 
 .gridContainer {
@@ -25,4 +28,36 @@
   height: 250px;
   position: absolute;
   bottom: 0;
+}
+
+.alertContainer {
+  width: 200px;
+  height: 40px;
+  position: absolute;
+  margin-top: 70px;
+  background-color: rgb(224, 31, 76);
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  font-weight: 900;
+  color: white;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fadeAlert {
+  animation: fadeAlert 3s cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+@keyframes fadeAlert {
+  0% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0;
+  }
 }

@@ -20,8 +20,19 @@ export class WordCorpus {
     return new WordCorpus(corpusText);
   }
 
+  /**
+   *
+   * @param {*} word word to check if in the corpus
+   * @returns returns True if word is in the corpus, False otherwise
+   */
   containsWord(word) {
     return this.words.has(word);
+  }
+
+  generateWord() {
+    const arr = [...this.words];
+    const random = Math.floor(Math.random() * arr.length);
+    return arr[random];
   }
 }
 
