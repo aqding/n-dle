@@ -14,17 +14,19 @@ import WordCorpus from "../Corpus";
 const GOOGLE_CLIENT_ID = "121479668229-t5j82jrbi9oejh7c8avada226s75bopn.apps.googleusercontent.com";
 
 const Main = ({ wordLength, numWords }) => {
+  const wordLengths = [4, 5, 6, 7];
   const [word, setWord] = useState("");
   const [guessedWords, setGuessedWords] = useState([]);
   const [won, setWon] = useState(false);
-  const WORD_LENGTH = wordLength;
+  const [WORD_LENGTH, setWordLength] = useState(wordLength);
   const NUM_WORDS = numWords;
   const [CORPUS, setCorpus] = useState(null);
   const [TARGET_WORD, setTargetWord] = useState("");
   const [ALERT, setAlert] = useState(false);
+  const [GAME_STARTED, setGameStarted] = useState(false);
 
   useEffect(() => {
-    WordCorpus.corpusFromPath("/Corpora/5.txt").then((newCorpus) => {
+    WordCorpus.corpusFromPath(`/Corpora/${WORD_LENGTH}.txt`).then((newCorpus) => {
       setCorpus(newCorpus);
       setTargetWord(newCorpus.generateWord());
     });
@@ -36,6 +38,25 @@ const Main = ({ wordLength, numWords }) => {
     setTimeout(() => {
       setAlert(false);
     }, 3000);
+  };
+
+  const handleNewGame = () => {
+    setGameStarted(false);
+    setGuessedWords([]);
+    setWon(false);
+    setCorpus(null);
+    setTargetWord("");
+    setWord("");
+    console.log("RESTARTING");
+  };
+
+  const startGame = (value) => {
+    WordCorpus.corpusFromPath(`/Corpora/${value}.txt`).then((newCorpus) => {
+      setWordLength(value);
+      setCorpus(newCorpus);
+      setTargetWord(newCorpus.generateWord());
+      setGameStarted(true);
+    });
   };
 
   const handleEnter = () => {
@@ -80,9 +101,15 @@ const Main = ({ wordLength, numWords }) => {
     }
   };
 
-  return (
+  return GAME_STARTED ? (
     <div className="mainContainer" onKeyDown={keyboardHandler} tabIndex="0">
       {ALERT ? <div className="alertContainer fadeAlert"> Invalid word!</div> : null};
+      {guessedWords.length === 6 || won ? (
+        <div className="answerContainer">
+          <div> The word was: {TARGET_WORD.toUpperCase()}</div>
+          <div onClick={handleNewGame}> Click to Play Again </div>
+        </div>
+      ) : null}
       <div className="gridContainer">
         {guessedWords.map((guess) => (
           <GuessedWord word={guess} targetWord={TARGET_WORD} />
@@ -100,6 +127,20 @@ const Main = ({ wordLength, numWords }) => {
       </div>
       <div className="keyboardContainer">
         <Keyboard handlers={handlers} word={TARGET_WORD} guesses={guessedWords} />
+      </div>
+    </div>
+  ) : (
+    <div className="mainContainer">
+      <div className="gameSelectionContainer">
+        <div>Select word length</div>
+        {wordLengths.map((length) => {
+          return (
+            <div className="selectionBox" onClick={() => startGame(length)}>
+              {" "}
+              {length}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
