@@ -1,17 +1,12 @@
 import React, { Component } from "react";
 import { useState, useEffect } from "react";
-import GoogleLogin, { GoogleLogout } from "react-google-login";
 
 import "../../utilities.css";
 import "./Main.css";
-import LetterBlock from "../modules/LetterBlock";
 import NewWord from "../modules/NewWord";
 import GuessedWord from "../modules/GuessedWord";
 import Keyboard from "../modules/Keyboard";
 import WordCorpus from "../Corpus";
-
-//TODO: REPLACE WITH YOUR OWN CLIENT_ID
-const GOOGLE_CLIENT_ID = "121479668229-t5j82jrbi9oejh7c8avada226s75bopn.apps.googleusercontent.com";
 
 const Main = ({ wordLength, numWords }) => {
   const wordLengths = [4, 5, 6, 7];

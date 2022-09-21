@@ -38,7 +38,7 @@ router.get("/corpusText", (req, res) => {
   const wordCorpusPath = req.query.wordCorpusPath;
   fs.readFile(path.join(__dirname, wordCorpusPath), "utf-8", (err, data) => {
     if (err) console.log("Failed to retrieve corpus");
-    res.send(data.split(/\n/));
+    res.send(data.split(/\n/).map((word) => word.toLowerCase()));
   });
 });
 
