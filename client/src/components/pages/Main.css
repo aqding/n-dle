@@ -17,7 +17,7 @@
 .gridContainer {
   display: flex;
   flex-direction: column;
-  width: 430px;
+  width: 60vw;
   height: 520px;
   margin-top: 120px;
   justify-content: space-between;
